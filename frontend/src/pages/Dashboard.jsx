@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Dashboard.css";
 
+const API_URL = "https://sanalbahceproje.onrender.com";
+
 function Dashboard() {
   const navigate = useNavigate();
 
@@ -27,7 +29,7 @@ function Dashboard() {
         const token = localStorage.getItem("token");
 
         const res = await axios.get(
-          "http://localhost:5000/api/plants",
+          `${API_URL}/api/plants`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -50,7 +52,7 @@ function Dashboard() {
       const token = localStorage.getItem("token");
 
       const res = await axios.post(
-        "http://localhost:5000/api/plants",
+        `${API_URL}/api/plants`,
         {
           name,
           type,
@@ -80,7 +82,7 @@ function Dashboard() {
       const token = localStorage.getItem("token");
 
       await axios.delete(
-        `http://localhost:5000/api/plants/${id}`,
+        `${API_URL}/api/plants/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -210,11 +212,7 @@ function Dashboard() {
                 Kaydet
               </button>
 
-              <button
-                onClick={() =>
-                  setShowModal(false)
-                }
-              >
+              <button onClick={() => setShowModal(false)}>
                 İptal
               </button>
 

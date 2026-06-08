@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./Notes.css";
 
+const API_URL = "https://sanalbahceproje.onrender.com";
+
 function Notes() {
   const [notes, setNotes] = useState([]);
   const [text, setText] = useState("");
@@ -12,7 +14,7 @@ function Notes() {
   const fetchNotes = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/notes/${plantId}`,
+        `${API_URL}/api/notes/${plantId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -35,7 +37,7 @@ function Notes() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/notes",
+        `${API_URL}/api/notes`,
         { plantId, text },
         {
           headers: {
@@ -53,11 +55,14 @@ function Notes() {
 
   const deleteNote = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/notes/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await axios.delete(
+        `${API_URL}/api/notes/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       setNotes(notes.filter((n) => n._id !== id));
     } catch (err) {

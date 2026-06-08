@@ -5,6 +5,8 @@ import "./Profile.css";
 
 import { validatePassword } from "../utils/validation";
 
+const API_URL = "https://sanalbahceproje.onrender.com";
+
 function Profile() {
   const [user, setUser] = useState(null);
 
@@ -40,7 +42,7 @@ function Profile() {
     const fetchUser = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/auth/me",
+          `${API_URL}/api/auth/me`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -57,6 +59,7 @@ function Profile() {
     else navigate("/login");
   }, [token, navigate]);
 
+
   const updateUsername = async () => {
     if (newUsername.length < 3) {
       showPopup("Kullanıcı adı en az 3 karakter olmalı", "error");
@@ -67,7 +70,7 @@ function Profile() {
       setLoadingUsername(true);
 
       const res = await axios.put(
-        "http://localhost:5000/api/auth/update-username",
+        `${API_URL}/api/auth/update-username`,
         { username: newUsername },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -82,6 +85,7 @@ function Profile() {
       setLoadingUsername(false);
     }
   };
+
 
   const updatePassword = async () => {
     if (!currentPassword || !newPassword) {
@@ -98,7 +102,7 @@ function Profile() {
       setLoadingPassword(true);
 
       await axios.put(
-        "http://localhost:5000/api/auth/change-password",
+        `${API_URL}/api/auth/change-password`,
         { currentPassword, newPassword },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -116,13 +120,12 @@ function Profile() {
     }
   };
 
-
   const deleteAccount = async () => {
     try {
       setLoadingDelete(true);
 
       await axios.delete(
-        "http://localhost:5000/api/auth/delete-account",
+        `${API_URL}/api/auth/delete-account`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -187,14 +190,12 @@ function Profile() {
         </div>
       )}
 
-      
       <div className="profile-card">
         <div className="avatar">👤</div>
         <h2>{user.username}</h2>
         <p>{user.email}</p>
       </div>
 
-    
       <div className="profile-card">
         <h3>Kullanıcı Adı</h3>
 
@@ -208,7 +209,6 @@ function Profile() {
         </button>
       </div>
 
-     
       <div className="profile-card">
         <h3>Şifre Değiştir</h3>
 
@@ -231,7 +231,6 @@ function Profile() {
         </button>
       </div>
 
-    
       <button onClick={logout} className="logout-btn">
         Çıkış Yap
       </button>

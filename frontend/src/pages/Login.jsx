@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { validateEmail } from "../utils/validation";
 import "./Login.css";
+import { API_URL } from "../config";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -48,9 +49,9 @@ function Login() {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        { email, password }
-      );
+  `${API_URL}/api/auth/login`,
+  { email, password }
+);
 
       localStorage.setItem("token", res.data.token);
 
