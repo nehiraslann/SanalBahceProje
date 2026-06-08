@@ -60,7 +60,6 @@ exports.login = async (req, res) => {
   }
 };
 
-// ME
 exports.getMe = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
