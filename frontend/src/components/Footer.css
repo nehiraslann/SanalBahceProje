@@ -1,0 +1,44 @@
+.footer {
+  width: 100%;
+  background: #6AA50F;
+  color: white;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 20px 30px;
+  margin-top: 40px;
+
+  flex-wrap: wrap;
+}
+
+.footer-left {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.footer-center {
+  text-align: center;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.footer-right a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.footer-right a:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}
