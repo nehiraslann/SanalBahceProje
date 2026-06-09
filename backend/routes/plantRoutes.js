@@ -30,6 +30,7 @@ router.get(
 router.put(
   "/:id",
   verifyToken,
+  validatePlant,
   updatePlant
 );
 

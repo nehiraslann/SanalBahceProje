@@ -47,6 +47,11 @@ function Dashboard() {
     fetchPlants();
   }, []);
 
+
+  const [editMode, setEditMode] = useState(false);
+  const [selectedPlantId, setSelectedPlantId] = useState(null);
+
+
   const addPlant = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -76,6 +81,43 @@ function Dashboard() {
       alert("Hata oluştu");
     }
   };
+
+  const updatePlant = async () => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const res = await axios.put(
+      `${API_URL}/api/plants/${selectedPlantId}`,
+      {
+        name,
+        type,
+        waterInterval,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    setPlants(
+      plants.map((p) =>
+        p._id === selectedPlantId ? res.data : p
+      )
+    );
+
+    setShowModal(false);
+    setEditMode(false);
+    setSelectedPlantId(null);
+
+    setName("");
+    setType("");
+    setWaterInterval("");
+
+  } catch (err) {
+    alert("Güncelleme hatası");
+  }
+};
 
   const deletePlant = async (id) => {
     try {
@@ -165,6 +207,22 @@ function Dashboard() {
                 </button>
 
                 <button
+                  className="edit-btn"
+                  onClick={() => {
+                  setEditMode(true);
+                  setSelectedPlantId(plant._id);
+
+                  setName(plant.name);
+                  setType(plant.type);
+                  setWaterInterval(plant.waterInterval);
+
+                  setShowModal(true);
+                  }}
+>
+                  Güncelle
+                </button>
+
+                <button
                   className="delete-btn"
                   onClick={() => deletePlant(plant._id)}
                 >
@@ -208,11 +266,27 @@ function Dashboard() {
 
             <div className="modal-buttons">
 
-              <button onClick={addPlant}>
-                Kaydet
+              <button
+                onClick={
+                 editMode
+                  ? updatePlant
+                  : addPlant
+                }
+              >
+                 {editMode ? "Güncelle" : "Kaydet"}
               </button>
 
-              <button onClick={() => setShowModal(false)}>
+              <button
+               onClick={() => {
+                setShowModal(false);
+                setEditMode(false);
+                setSelectedPlantId(null);
+
+                setName("");
+                setType("");
+                setWaterInterval("");
+               }}
+              >
                 İptal
               </button>
 
