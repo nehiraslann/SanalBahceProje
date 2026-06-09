@@ -9,22 +9,6 @@
   box-sizing: border-box;
 }
 
-.dashboard-card {
-  width: 80%;
-  min-height: 80vh;
-  background-color: white;
-  border-radius: 30px;
-  padding: 40px;
-  box-shadow: 0px 20px 50px rgba(0,0,0,0.2);
-  text-align: center;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-
-.dashboard-card h1 {
-  margin-bottom: 20px;
-  color: #2f3f12;
-}
 
 .add-btn {
   padding: 15px 25px;
