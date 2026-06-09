@@ -1,24 +1,31 @@
 .page {
-  min-height: calc(100vh - 80px);
   width: 100%;
+  min-height: calc(100vh - 120px);
+
   background: linear-gradient(135deg, #F5F5DC, #B5E549);
+
   display: flex;
   justify-content: center;
+  align-items: flex-start;
+
   font-family: Arial;
   padding: 20px;
+
   box-sizing: border-box;
 }
 
 .dashboard-card {
-  width: 100%;
-  max-width: 1200px;
-  min-height: 80vh;
+  width: 80%;
   background-color: white;
+
   border-radius: 30px;
   padding: 40px;
+
   box-shadow: 0px 20px 50px rgba(0,0,0,0.2);
+
   text-align: center;
-  overflow: hidden;
+  overflow: visible;
+
   box-sizing: border-box;
 }
 
@@ -197,4 +204,10 @@
 
 .ok-btn:hover {
   background-color: #45a049;
+}
+
+@media (max-width: 600px) {
+  .dashboard-card {
+    margin-bottom: 80px;
+  }
 }
