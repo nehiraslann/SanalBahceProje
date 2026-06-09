@@ -165,7 +165,7 @@ function Notes() {
           <div className="note-card" key={note._id}>
 
             <div className="note-header">
-              <span>📩 Günlük Not</span>
+              <span> Günlük Not</span>
 
               <div>
                 <button onClick={() => startEdit(note)}>✏️</button>
@@ -179,7 +179,7 @@ function Notes() {
                   value={editText}
                   onChange={(e) => setEditText(e.target.value)}
                 />
-
+              <div className="edit-actions">
                 <button onClick={() => updateNote(note._id)}>
                   Kaydet
                 </button>
@@ -187,6 +187,9 @@ function Notes() {
                 <button onClick={() => setEditingId(null)}>
                   İptal
                 </button>
+
+              </div>
+
               </>
             ) : (
               <p className="note-text">{note.text}</p>
@@ -206,7 +209,7 @@ function Notes() {
         <div className="modal-overlay">
           <div className="modal">
             <h3>⚠️ Hata</h3>
-            <p>{error}</p>
+            <p>Günlük notu 500 karakterden fazla olamaz</p>
 
             <button onClick={() => setShowError(false)}>
               Tamam

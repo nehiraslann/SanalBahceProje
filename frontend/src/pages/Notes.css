@@ -193,3 +193,37 @@
 .modal button:hover {
   background: #5b8f0d;
 }
+
+.edit-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.edit-actions button:first-child {
+  background: #6AA50F;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.edit-actions button:first-child:hover {
+  background: #5b8f0d;
+}
+
+
+.edit-actions button:last-child {
+  background: #e74c3c;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.edit-actions button:last-child:hover {
+  background: #c0392b;
+}
