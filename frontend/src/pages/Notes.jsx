@@ -10,15 +10,17 @@ function Notes() {
   const [selectedPlantId, setSelectedPlantId] = useState("");
   const [text, setText] = useState("");
 
+  // EDIT STATES
+  const [editingId, setEditingId] = useState(null);
+  const [editText, setEditText] = useState("");
+
   const token = localStorage.getItem("token");
 
- 
+  // ---------------- PLANTS ----------------
   const fetchPlants = async () => {
     try {
       const res = await axios.get(`${API_URL}/api/plants`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
 
       setPlants(res.data);
@@ -27,7 +29,7 @@ function Notes() {
     }
   };
 
-
+  // ---------------- NOTES ----------------
   const fetchNotes = async (plantId) => {
     if (!plantId) return;
 
@@ -35,9 +37,7 @@ function Notes() {
       const res = await axios.get(
         `${API_URL}/api/notes/${plantId}`,
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
 
@@ -47,7 +47,7 @@ function Notes() {
     }
   };
 
- 
+  // ---------------- EFFECTS ----------------
   useEffect(() => {
     fetchPlants();
   }, []);
@@ -58,38 +58,29 @@ function Notes() {
     }
   }, [selectedPlantId]);
 
- 
+  // ---------------- ADD NOTE ----------------
   const addNote = async () => {
     if (!text || !selectedPlantId) return;
 
     try {
       const res = await axios.post(
         `${API_URL}/api/notes`,
-        {
-          plantId: selectedPlantId,
-          text,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        { plantId: selectedPlantId, text },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
       setNotes([res.data, ...notes]);
       setText("");
     } catch (err) {
-      console.log("ADD NOTE ERROR:", err);
+      console.log("ADD ERROR:", err);
     }
   };
 
-
+  // ---------------- DELETE NOTE ----------------
   const deleteNote = async (id) => {
     try {
       await axios.delete(`${API_URL}/api/notes/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
 
       setNotes(notes.filter((n) => n._id !== id));
@@ -98,12 +89,38 @@ function Notes() {
     }
   };
 
+  // ---------------- EDIT START ----------------
+  const startEdit = (note) => {
+    setEditingId(note._id);
+    setEditText(note.text);
+  };
+
+  // ---------------- UPDATE NOTE ----------------
+  const updateNote = async (id) => {
+    try {
+      const res = await axios.put(
+        `${API_URL}/api/notes/${id}`,
+        { text: editText },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      setNotes(notes.map((n) => (n._id === id ? res.data : n)));
+
+      setEditingId(null);
+      setEditText("");
+    } catch (err) {
+      console.log("UPDATE ERROR:", err);
+    }
+  };
+
   return (
     <div className="notes-page">
 
       <h1>📝 Bahçe Günlüğüm</h1>
 
-    
+      {/* ---------------- PLANT SELECT ---------------- */}
       <div className="plant-select-box">
         <select
           value={selectedPlantId}
@@ -119,7 +136,7 @@ function Notes() {
         </select>
       </div>
 
-
+      {/* ---------------- INPUT ---------------- */}
       <div className="note-input">
         <input
           value={text}
@@ -138,6 +155,7 @@ function Notes() {
         </p>
       )}
 
+      {/* ---------------- NOTES ---------------- */}
       <div className="notes-grid">
 
         {notes.map((note) => (
@@ -146,12 +164,36 @@ function Notes() {
             <div className="note-header">
               <span>📩 Günlük Not</span>
 
-              <button onClick={() => deleteNote(note._id)}>
-                🗑
-              </button>
+              <div>
+                <button onClick={() => startEdit(note)}>
+                  ✏️
+                </button>
+
+                <button onClick={() => deleteNote(note._id)}>
+                  🗑
+                </button>
+              </div>
             </div>
 
-            <p className="note-text">{note.text}</p>
+            {/* ---------------- EDIT / VIEW ---------------- */}
+            {editingId === note._id ? (
+              <>
+                <input
+                  value={editText}
+                  onChange={(e) => setEditText(e.target.value)}
+                />
+
+                <button onClick={() => updateNote(note._id)}>
+                  Kaydet
+                </button>
+
+                <button onClick={() => setEditingId(null)}>
+                  İptal
+                </button>
+              </>
+            ) : (
+              <p className="note-text">{note.text}</p>
+            )}
 
             <small className="note-date">
               {new Date(note.createdAt).toLocaleString("tr-TR")}
