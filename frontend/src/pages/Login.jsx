@@ -33,13 +33,12 @@ function Login() {
 
   const handleLogin = async () => {
 
-    // boş kontrol
     if (!email || !password) {
       showPopup("Email ve şifre giriniz", "error");
       return;
     }
 
-    // email format kontrolü
+  
     if (!validateEmail(email)) {
       showPopup("Geçerli bir email giriniz", "error");
       return;
@@ -72,7 +71,7 @@ function Login() {
   return (
     <div className="page">
 
-      {/* POPUP */}
+      
       {popup.show && (
         <div className="popup-overlay">
           <div className={`popup-box ${popup.type}`}>
@@ -116,10 +115,10 @@ function Login() {
           onClick={handleLogin}
           disabled={loading}
         >
-          {loading ? "Giriş yapılıyor..." : "Login"}
+          {loading ? "Giriş yapılıyor..." : "Giriş Yap"}
         </button>
 
-        {/* REGISTER LINK */}
+     
         <div style={{ marginTop: "15px", textAlign: "center" }}>
           <span>Hesabın yok mu? </span>
 

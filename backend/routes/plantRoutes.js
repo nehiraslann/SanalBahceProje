@@ -12,33 +12,15 @@ const { verifyToken } = require("../middleware/authMiddleware");
 const validatePlant = require("../middleware/validatePlant");
 
 
-router.post(
-  "/",
-  verifyToken,
-  validatePlant,
-  createPlant
-);
+router.post("/", verifyToken, validatePlant, createPlant);
 
 
-router.get(
-  "/",
-  verifyToken,
-  getPlants
-);
+router.get("/", verifyToken, getPlants);
 
 
-router.put(
-  "/:id",
-  verifyToken,
-  validatePlant,
-  updatePlant
-);
+router.put("/:id", verifyToken, validatePlant, updatePlant);
 
 
-router.delete(
-  "/:id",
-  verifyToken,
-  deletePlant
-);
+router.delete("/:id", verifyToken, deletePlant);
 
 module.exports = router;

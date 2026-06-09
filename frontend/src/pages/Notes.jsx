@@ -208,7 +208,7 @@ function Notes() {
       {showError && (
         <div className="modal-overlay">
           <div className="modal">
-            <h3>⚠️ Hata</h3>
+            <h3>Hata</h3>
             <p>Günlük notu 500 karakterden fazla olamaz</p>
 
             <button onClick={() => setShowError(false)}>

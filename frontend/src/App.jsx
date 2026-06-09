@@ -15,7 +15,7 @@ import Profile from "./pages/Profile";
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
 
-  // Token Senkron Takip
+  // Token senkron takip
   useEffect(() => {
     const syncToken = () => {
       setToken(localStorage.getItem("token"));

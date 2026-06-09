@@ -12,14 +12,11 @@ const {
 
 const { verifyToken } = require("../middleware/authMiddleware");
 
-// Auth routes
 router.post("/register", register);
 router.post("/login", login);
 
-// User info
 router.get("/me", verifyToken, getMe);
 
-// Profil update
 router.put("/update-username", verifyToken, updateUsername);
 router.put("/change-password", verifyToken, changePassword);
 

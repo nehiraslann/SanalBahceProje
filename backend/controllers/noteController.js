@@ -1,6 +1,5 @@
 const Note = require("../models/Note");
 
-// Not ekle
 exports.createNote = async (req, res) => {
   try {
     const { plantId, text } = req.body;
@@ -18,7 +17,7 @@ exports.createNote = async (req, res) => {
   }
 };
 
-// Plant ait notlar getir
+
 exports.getNotesByPlant = async (req, res) => {
   try {
     const notes = await Note.find({
@@ -35,7 +34,6 @@ exports.getNotesByPlant = async (req, res) => {
   }
 };
 
-// Not güncelle
 exports.updateNote = async (req, res) => {
   try {
     const { text } = req.body;
@@ -66,13 +64,12 @@ exports.updateNote = async (req, res) => {
   }
 };
 
-// Not sil
 exports.deleteNote = async (req, res) => {
   try {
     const note = await Note.findById(req.params.id);
 
     if (!note) {
-      return res.status(404).json({ message: "Note not found" });
+      return res.status(404).json({ message: "Günlük not bulunamadı" });
     }
 
     if (note.userId.toString() !== req.user.id) {
@@ -81,7 +78,7 @@ exports.deleteNote = async (req, res) => {
 
     await note.deleteOne();
 
-    res.json({ message: "Note deleted" });
+    res.json({ message: "Günlük not silindi" });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

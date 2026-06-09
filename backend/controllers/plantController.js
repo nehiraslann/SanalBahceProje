@@ -41,7 +41,7 @@ exports.updatePlant = async (req, res) => {
     );
 
     if (!plant) {
-      return res.status(404).json({ message: "Plant not found" });
+      return res.status(404).json({ message: "Bitki bulunamadı" });
     }
 
     res.json(plant);
@@ -60,7 +60,7 @@ exports.deletePlant = async (req, res) => {
     });
 
     if (!plant) {
-      return res.status(404).json({ message: "Plant not found" });
+      return res.status(404).json({ message: "Bitki bulunamadı" });
     }
 
     res.json({ message: "Plant deleted" });

@@ -33,19 +33,18 @@ function Register() {
 
   const handleRegister = async () => {
 
-    // boş kontrol
     if (!username || !email || !password) {
       showPopup("Tüm alanları doldurunuz", "error");
       return;
     }
 
-    // email kontrol
+
     if (!validateEmail(email)) {
       showPopup("Geçerli bir email giriniz", "error");
       return;
     }
 
-    // password strength kontrol
+ 
     if (!validatePassword(password)) {
       showPopup("Şifre en az 6 karakter, 1 harf ve 1 rakam içermeli", "error");
       return;

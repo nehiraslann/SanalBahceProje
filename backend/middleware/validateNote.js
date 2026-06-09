@@ -3,7 +3,7 @@ const validateNote = (req, res, next) => {
 
   if (!text || text.trim().length < 3) {
     return res.status(400).json({
-      message: "Note en az 3 karakter olmalı",
+      message: "Not en az 3 karakter olmalı",
     });
   }
 

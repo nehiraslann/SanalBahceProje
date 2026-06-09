@@ -8,7 +8,7 @@ function Home() {
   return (
     <div className="home-wrapper">
 
-      {/* HERO */}
+      
       <section className="hero">
 
         <h1>🌿 Sanal Bahçem</h1>
@@ -27,7 +27,7 @@ function Home() {
 
       </section>
 
-      {/* STATS */}
+      
       <section className="stats">
 
         <h2> İstatistikler</h2>
@@ -53,7 +53,7 @@ function Home() {
 
       </section>
 
-      {/* FEATURES */}
+    
       <section className="features">
 
         <h2>🌱 Özellikler</h2>
@@ -69,7 +69,7 @@ function Home() {
 
       </section>
 
-      {/* CTA */}
+      
       <section className="cta">
 
         <h2> Başlamaya Hazır mısın?</h2>
