@@ -370,7 +370,7 @@ function Dashboard() {
 
       <p>{errorMessage}</p>
 
-      <button onClick={() => setShowErrorModal(false)}>
+      <button className="ok-btn" onClick={() => setShowErrorModal(false)}>
         Tamam
       </button>
 
