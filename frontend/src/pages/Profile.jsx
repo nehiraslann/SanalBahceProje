@@ -173,11 +173,12 @@ function Profile() {
             <p>Bu işlem geri alınamaz.</p>
 
             <div className="modal-actions">
-              <button onClick={() => setShowDeleteModal(false)}>
+              <button className="cancel-btn" onClick={() => setShowDeleteModal(false)}>
                 Hayır
               </button>
 
               <button
+                className="confirm-btn"
                 onClick={() => {
                   setShowDeleteModal(false);
                   deleteAccount();
