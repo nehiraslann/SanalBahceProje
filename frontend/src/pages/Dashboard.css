@@ -1,25 +1,24 @@
-
 .page {
   min-height: 100vh;
   width: 100%;
   background: linear-gradient(135deg, #F5F5DC, #B5E549);
   display: flex;
   justify-content: center;
-  align-items: center;
   font-family: Arial;
   padding: 20px;
+  box-sizing: border-box;
 }
-
 
 .dashboard-card {
   width: 80%;
-  min-height: 80%;
+  min-height: 80vh;
   background-color: white;
   border-radius: 30px;
   padding: 40px;
   box-shadow: 0px 20px 50px rgba(0,0,0,0.2);
   text-align: center;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .dashboard-card h1 {
@@ -63,6 +62,12 @@
   .plant-grid {
     grid-template-columns: 1fr;
   }
+
+  .dashboard-card {
+    width: 95%;
+    padding: 20px;
+    border-radius: 20px;
+  }
 }
 
 .plant-card {
@@ -71,6 +76,7 @@
   border-radius: 15px;
   box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
   transition: 0.2s;
+  box-sizing: border-box;
 }
 
 @media (min-width: 768px) {
@@ -98,6 +104,7 @@
   background: #a93226;
 }
 
+
 .modal-bg {
   position: fixed;
   inset: 0;
@@ -106,6 +113,7 @@
   justify-content: center;
   align-items: center;
   padding: 15px;
+  box-sizing: border-box;
 }
 
 .modal {
@@ -117,12 +125,14 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  box-sizing: border-box;
 }
 
 .modal input {
   padding: 12px;
   border-radius: 10px;
   border: none;
+  font-size: 16px; 
 }
 
 .modal-buttons {
@@ -134,7 +144,7 @@
 .modal-buttons button {
   flex: 1;
   padding: 10px;
-  border: 12px;
+  border: none;
   border-radius: 8px;
   cursor: pointer;
 }
@@ -163,14 +173,6 @@
   background: #9fd12f;
 }
 
-@media (max-width: 600px) {
-  .dashboard-card {
-    width: 95%;
-    padding: 20px;
-    border-radius: 20px;
-  }
-}
-
 .edit-btn {
   background-color: rgba(255, 168, 5, 0.94);
   margin-bottom: 10px;
@@ -186,7 +188,7 @@
   background-color: #4CAF50;
   color: white;
   padding: 8px 14px;
-  border: 12px;
+  border: none;
   border-radius: 6px;
   cursor: pointer;
   margin-top: 10px;
