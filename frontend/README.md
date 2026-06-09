@@ -1,19 +1,81 @@
-# React + Vite
+# 🌿 Sanal Bahçem - MERN Stack Full Stack Proje
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sanal Bahçem, kullanıcıların bitkilerini dijital ortamda yönetebildiği, sulama takibi yapabildiği ve günlük notlar tutabildiği full-stack bir web uygulamasıdır.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Proje Özellikleri
 
-## React Compiler
+- Kullanıcı kayıt / giriş sistemi (JWT Authentication)
+- Bitki ekleme, güncelleme, silme ve listeleme (CRUD)
+- Bitkiye özel günlük not sistemi
+- Güvenli kullanıcı işlemleri (bcrypt + JWT)
+- Responsive modern UI
+- Gerçek zamanlı API entegrasyonu
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Kullanılan Teknolojiler
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Frontend
+- React.js
+- React Router DOM
+- Axios
+- Context API / useState / useEffect
+- CSS (Responsive Design)
+
+### Backend
+- Node.js
+- Express.js
+- MongoDB + Mongoose
+- JWT (Authentication)
+- bcryptjs
+- dotenv
+- cors
+
+### Database
+- MongoDB Atlas
+
+---
+
+## 📁 Proje Yapısı
+backend/
+├── controllers/
+├── models/
+├── routes/
+├── middleware/
+├── server.js
+
+frontend/
+├── src/
+│ ├── pages/
+│ ├── components/
+│ ├── utils/
+│ ├── config.js
 
 
-deneme commiti için değişiklik
+---
+
+## ⚙️ Kurulum Adımları
+
+### 1️⃣ Projeyi klonla
+```bash
+git clone https://github.com/kullaniciadi/sanal-bahcem.git
+cd backend
+npm install
+
+.env dosyası oluştur:
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+PORT=5000
+
+npm start
+
+cd frontend
+npm install
+npm run dev
+
+Proje Mimarisi
+MVC (Model - Controller - Routes)
+RESTful API yapısı
+Component-based React architecture

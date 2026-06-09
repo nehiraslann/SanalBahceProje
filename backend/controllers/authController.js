@@ -9,7 +9,7 @@ exports.register = async (req, res) => {
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ message: "Kullanıcı adı zaten var" });
+      return res.status(400).json({ message: "Kullanıcı zaten var" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -65,7 +65,7 @@ exports.getMe = async (req, res) => {
     const user = await User.findById(req.user.id).select("-password");
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "Kullanıcı bulunamadı" });
     }
 
     res.json(user);
