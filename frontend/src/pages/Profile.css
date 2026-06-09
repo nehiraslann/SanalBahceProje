@@ -182,6 +182,10 @@
 
 .modal-actions {
   display: flex;
+  border-radius: 8px;
+  border: none;
+  background: #e83c8f;
+  color: rgb(228, 228, 228);
   justify-content: space-between;
   margin-top: 20px;
 }
