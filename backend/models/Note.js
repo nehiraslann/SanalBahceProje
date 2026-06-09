@@ -16,7 +16,10 @@ const noteSchema = new mongoose.Schema(
 
     text: {
       type: String,
-      required: true,
+      required: [true, "Günlük notu boş eklenemez"],
+      minlength: [3, "Günlük notu en az 3 karakter olmalı"],
+      maxlength: [500, "Günlük notu 500 karakterden fazla olamaz"],
+      trim: true,
     },
   },
   { timestamps: true }

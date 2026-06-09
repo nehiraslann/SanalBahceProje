@@ -25,8 +25,8 @@ exports.getNotesByPlant = async (req, res) => {
       plantId: req.params.plantId,
       userId: req.user.id,
     })
-      .populate("userId", "username email")   
-      .populate("plantId", "name type")       
+      .populate("userId", "username email")
+      .populate("plantId", "name type")
       .sort({ createdAt: -1 });
 
     res.json(notes);
@@ -35,6 +35,38 @@ exports.getNotesByPlant = async (req, res) => {
   }
 };
 
+// Not güncelle
+exports.updateNote = async (req, res) => {
+  try {
+    const { text } = req.body;
+
+    const note = await Note.findById(req.params.id);
+
+    if (!note) {
+      return res.status(404).json({
+        message: "Note not found",
+      });
+    }
+
+    if (note.userId.toString() !== req.user.id) {
+      return res.status(403).json({
+        message: "Unauthorized",
+      });
+    }
+
+    note.text = text;
+
+    await note.save();
+
+    res.json(note);
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+};
+
+// Not sil
 exports.deleteNote = async (req, res) => {
   try {
     const note = await Note.findById(req.params.id);
@@ -42,7 +74,6 @@ exports.deleteNote = async (req, res) => {
     if (!note) {
       return res.status(404).json({ message: "Note not found" });
     }
-
 
     if (note.userId.toString() !== req.user.id) {
       return res.status(403).json({ message: "Unauthorized" });
