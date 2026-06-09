@@ -4,8 +4,9 @@
   background: linear-gradient(135deg, #F5F5DC, #B5E549);
 
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 
   font-family: Arial;
   padding: 20px;
@@ -18,6 +19,7 @@
 .page h1 {
   margin-bottom: 20px;
   color: #2f3f12;
+  text-align: center;
 }
 
 /* Add button */
@@ -29,6 +31,8 @@
   border-radius: 12px;
   cursor: pointer;
   margin-bottom: 30px;
+
+  display: block;
 }
 
 .add-btn:hover {
@@ -40,7 +44,9 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 15px;
+
   width: 80%;
+  margin: 0 auto;
 }
 
 /* responsive */
