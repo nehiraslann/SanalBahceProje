@@ -355,7 +355,7 @@ function Dashboard() {
           top: "10px",
           background: "red",
           color: "white",
-          border: "none",
+          border: "12px",
           borderRadius: "50%",
           width: "30px",
           height: "30px",

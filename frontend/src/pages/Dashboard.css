@@ -134,7 +134,7 @@
 .modal-buttons button {
   flex: 1;
   padding: 10px;
-  border: none;
+  border: 12px;
   border-radius: 8px;
   cursor: pointer;
 }
@@ -169,4 +169,27 @@
     padding: 20px;
     border-radius: 20px;
   }
+}
+
+.edit-btn {
+  background-color: orange;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.ok-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 14px;
+  border: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.ok-btn:hover {
+  background-color: #45a049;
 }
