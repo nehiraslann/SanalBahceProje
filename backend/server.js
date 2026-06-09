@@ -28,7 +28,15 @@ app.use("/api/auth", authRoutes);
 app.use("/api/plants", plantRoutes);
 app.use("/api/notes", noteRoutes);
 
+// 404
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: "Route bulunamadı",
+  });
+});
 
+// Error middleware 
 const errorHandler = require("./middleware/errorMiddleware");
 app.use(errorHandler);
 
