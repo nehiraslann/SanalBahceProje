@@ -3,7 +3,7 @@ const validatePlant = (req, res, next) => {
 
   if (name !== undefined && typeof name === "string" && name.trim() === "") {
     return res.status(400).json({
-      message: "Plant name is required",
+      message: "Bitki adı boş olamaz",
     });
   }
 
@@ -12,7 +12,7 @@ const validatePlant = (req, res, next) => {
     Number(waterInterval) < 1
   ) {
     return res.status(400).json({
-      message: "Water interval must be greater than 0",
+      message: "Sulama günü 0'dan büyük olmalı",
     });
   }
 

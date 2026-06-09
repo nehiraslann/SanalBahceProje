@@ -102,8 +102,11 @@ function Dashboard() {
       setWaterInterval("");
 
     } catch (err) {
-      alert("Hata oluştu");
-    }
+      const message =
+      err.response?.data?.message || "Bitki eklenemedi";
+
+  showError(message);
+}
   };
 
   const updatePlant = async () => {
@@ -156,8 +159,11 @@ function Dashboard() {
     setWaterInterval("");
 
   } catch (err) {
-    alert("Güncelleme hatası");
-  }
+  const message =
+    err.response?.data?.message || "Güncelleme hatası";
+
+  showError(message);
+}
 };
 
   const deletePlant = async (id) => {
@@ -301,7 +307,7 @@ function Dashboard() {
               placeholder="Sulama günü"
               value={waterInterval}
               onChange={(e) =>
-                setWaterInterval(e.target.value)
+                setWaterInterval(Number(e.target.value))
               }
             />
 
@@ -360,7 +366,7 @@ function Dashboard() {
         ✖
       </button>
 
-      <h3 style={{ color: "red" }}>Hata</h3>
+      <h3 style={{ color: "red" }}> Hata</h3>
 
       <p>{errorMessage}</p>
 
