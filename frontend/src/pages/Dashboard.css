@@ -1,5 +1,5 @@
 .page {
-  min-height: 100vh;
+  min-height: calc(100vh - 80px);
   width: 100%;
   background: linear-gradient(135deg, #F5F5DC, #B5E549);
   display: flex;
@@ -10,7 +10,8 @@
 }
 
 .dashboard-card {
-  width: 80%;
+  width: 100%;
+  max-width: 1200px;
   min-height: 80vh;
   background-color: white;
   border-radius: 30px;
