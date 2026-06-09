@@ -10,13 +10,15 @@ function Notes() {
   const [selectedPlantId, setSelectedPlantId] = useState("");
   const [text, setText] = useState("");
 
-  // EDIT STATES
   const [editingId, setEditingId] = useState(null);
   const [editText, setEditText] = useState("");
 
+
+  const [error, setError] = useState("");
+  const [showError, setShowError] = useState(false);
+
   const token = localStorage.getItem("token");
 
-  // ---------------- PLANTS ----------------
   const fetchPlants = async () => {
     try {
       const res = await axios.get(`${API_URL}/api/plants`, {
@@ -25,11 +27,10 @@ function Notes() {
 
       setPlants(res.data);
     } catch (err) {
-      console.log("PLANTS ERROR:", err);
+      console.log(err);
     }
   };
 
-  // ---------------- NOTES ----------------
   const fetchNotes = async (plantId) => {
     if (!plantId) return;
 
@@ -43,22 +44,19 @@ function Notes() {
 
       setNotes(res.data);
     } catch (err) {
-      console.log("NOTES ERROR:", err);
+      console.log(err);
     }
   };
 
-  // ---------------- EFFECTS ----------------
   useEffect(() => {
     fetchPlants();
   }, []);
 
   useEffect(() => {
-    if (selectedPlantId) {
-      fetchNotes(selectedPlantId);
-    }
+    if (selectedPlantId) fetchNotes(selectedPlantId);
   }, [selectedPlantId]);
 
-  // ---------------- ADD NOTE ----------------
+ 
   const addNote = async () => {
     if (!text || !selectedPlantId) return;
 
@@ -72,11 +70,13 @@ function Notes() {
       setNotes([res.data, ...notes]);
       setText("");
     } catch (err) {
-      console.log("ADD ERROR:", err);
+      console.log(err);
+
+      setError(err.response?.data?.message || "Bir hata oluştu");
+      setShowError(true);
     }
   };
 
-  // ---------------- DELETE NOTE ----------------
   const deleteNote = async (id) => {
     try {
       await axios.delete(`${API_URL}/api/notes/${id}`, {
@@ -85,25 +85,25 @@ function Notes() {
 
       setNotes(notes.filter((n) => n._id !== id));
     } catch (err) {
-      console.log("DELETE ERROR:", err);
+      console.log(err);
+
+      setError(err.response?.data?.message || "Silme işlemi başarısız");
+      setShowError(true);
     }
   };
 
-  // ---------------- EDIT START ----------------
+  
   const startEdit = (note) => {
     setEditingId(note._id);
     setEditText(note.text);
   };
 
-  // ---------------- UPDATE NOTE ----------------
   const updateNote = async (id) => {
     try {
       const res = await axios.put(
         `${API_URL}/api/notes/${id}`,
         { text: editText },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
       setNotes(notes.map((n) => (n._id === id ? res.data : n)));
@@ -111,23 +111,25 @@ function Notes() {
       setEditingId(null);
       setEditText("");
     } catch (err) {
-      console.log("UPDATE ERROR:", err);
+      console.log(err);
+
+      setError(err.response?.data?.message || "Güncelleme başarısız");
+      setShowError(true);
     }
   };
 
   return (
     <div className="notes-page">
 
-      <h1>📝 Bahçe Günlüğüm</h1>
+      <h1> Bahçe Günlüğüm</h1>
 
-      {/* ---------------- PLANT SELECT ---------------- */}
+     
       <div className="plant-select-box">
         <select
           value={selectedPlantId}
           onChange={(e) => setSelectedPlantId(e.target.value)}
         >
           <option value="">🌱 Bitki seç</option>
-
           {plants.map((plant) => (
             <option key={plant._id} value={plant._id}>
               {plant.name}
@@ -136,7 +138,7 @@ function Notes() {
         </select>
       </div>
 
-      {/* ---------------- INPUT ---------------- */}
+      
       <div className="note-input">
         <input
           value={text}
@@ -144,6 +146,7 @@ function Notes() {
           placeholder="Bugün ne yaptın?"
           disabled={!selectedPlantId}
         />
+
         <button onClick={addNote} disabled={!selectedPlantId}>
           Ekle
         </button>
@@ -155,7 +158,7 @@ function Notes() {
         </p>
       )}
 
-      {/* ---------------- NOTES ---------------- */}
+    
       <div className="notes-grid">
 
         {notes.map((note) => (
@@ -165,17 +168,11 @@ function Notes() {
               <span>📩 Günlük Not</span>
 
               <div>
-                <button onClick={() => startEdit(note)}>
-                  ✏️
-                </button>
-
-                <button onClick={() => deleteNote(note._id)}>
-                  🗑
-                </button>
+                <button onClick={() => startEdit(note)}>✏️</button>
+                <button onClick={() => deleteNote(note._id)}>🗑</button>
               </div>
             </div>
 
-            {/* ---------------- EDIT / VIEW ---------------- */}
             {editingId === note._id ? (
               <>
                 <input
@@ -203,6 +200,20 @@ function Notes() {
         ))}
 
       </div>
+
+      
+      {showError && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h3>⚠️ Hata</h3>
+            <p>{error}</p>
+
+            <button onClick={() => setShowError(false)}>
+              Tamam
+            </button>
+          </div>
+        </div>
+      )}
 
     </div>
   );
