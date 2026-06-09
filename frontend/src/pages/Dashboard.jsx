@@ -51,9 +51,33 @@ function Dashboard() {
   const [editMode, setEditMode] = useState(false);
   const [selectedPlantId, setSelectedPlantId] = useState(null);
 
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showErrorModal, setShowErrorModal] = useState(false);
+
+  const showError = (message) => {
+  setErrorMessage(message);
+  setShowErrorModal(true);
+};
 
   const addPlant = async () => {
     try {
+
+      if (!name.trim()) {
+      showError("Bitki adı boş olamaz");
+      return;
+    }
+
+    if (!type.trim()) {
+      showError("Bitki türü boş olamaz");
+      return;
+    }
+
+    if (!waterInterval) {
+      showError("Sulama günü boş olamaz");
+      return;
+    }
+
+
       const token = localStorage.getItem("token");
 
       const res = await axios.post(
@@ -84,6 +108,23 @@ function Dashboard() {
 
   const updatePlant = async () => {
   try {
+
+    if (!name.trim()) {
+      showError("Bitki adı boş olamaz");
+      return;
+    }
+
+    if (!type.trim()) {
+      showError("Bitki türü boş olamaz");
+      return;
+    }
+
+    if (!waterInterval) {
+      showError("Sulama günü boş olamaz");
+      return;
+    }
+
+
     const token = localStorage.getItem("token");
 
     const res = await axios.put(
@@ -296,6 +337,43 @@ function Dashboard() {
 
         </div>
       )}
+
+      {showErrorModal && (
+  <div className="modal-bg">
+    <div className="modal">
+
+      <button
+        style={{
+          position: "absolute",
+          right: "10px",
+          top: "10px",
+          background: "red",
+          color: "white",
+          border: "none",
+          borderRadius: "50%",
+          width: "30px",
+          height: "30px",
+          cursor: "pointer"
+        }}
+        onClick={() => setShowErrorModal(false)}
+      >
+        ✖
+      </button>
+
+      <h3 style={{ color: "red" }}>Hata</h3>
+
+      <p>{errorMessage}</p>
+
+      <button onClick={() => setShowErrorModal(false)}>
+        Tamam
+      </button>
+
+    </div>
+  </div>
+)}
+
+
+
 
     </div>
   );
