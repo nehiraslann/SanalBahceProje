@@ -38,7 +38,7 @@ Sanal Bahçem, kullanıcıların bitkilerini dijital ortamda yönetebildiği, su
 
 ---
 
-## 📂 Project Structure
+## 📂 Proje Yapısı
 
 ### Backend
 controllers/
