@@ -75,8 +75,3 @@ npm start
 cd frontend
 npm install
 npm run dev
-
-Proje Mimarisi
-MVC (Model - Controller - Routes)
-RESTful API yapısı
-Component-based React architecture
