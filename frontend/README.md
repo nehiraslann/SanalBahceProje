@@ -38,20 +38,21 @@ Sanal Bahçem, kullanıcıların bitkilerini dijital ortamda yönetebildiği, su
 
 ---
 
-## 📁 Proje Yapısı
-backend/
-├── controllers/
-├── models/
-├── routes/
-├── middleware/
-├── server.js
+## 📂 Project Structure
 
-frontend/
-├── src/
-│ ├── pages/
-│ ├── components/
-│ ├── utils/
-│ ├── config.js
+### Backend
+controllers/
+models/
+routes/
+middleware/
+server.js
+
+### Frontend
+src/
+  pages/
+  components/
+  utils/
+  config.js
 
 
 ---
