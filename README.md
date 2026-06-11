@@ -61,7 +61,7 @@ src/
 
 ###  Projeyi klonla
 ```bash
-git clone https://github.com/kullaniciadi/sanal-bahcem.git
+git clone https://github.com/nehiraslann/SanalBahceProje.git
 cd backend
 npm install
 
